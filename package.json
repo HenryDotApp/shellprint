@@ -1,8 +1,26 @@
 {
   "name": "shellprint",
   "version": "0.0.1",
-  "private": true,
+  "description": "Lightweight telemetry for Claude Agent SDK tool calls",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HenryDotApp/shellprint.git"
+  },
+  "homepage": "https://github.com/HenryDotApp/shellprint#readme",
+  "bugs": {
+    "url": "https://github.com/HenryDotApp/shellprint/issues"
+  },
+  "keywords": [
+    "anthropic",
+    "claude",
+    "agent-sdk",
+    "telemetry",
+    "audit"
+  ],
   "type": "module",
+  "files": [
+    "dist/src"
+  ],
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "exports": {
@@ -14,6 +32,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "example": "npm run build && node dist/example_query.js",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test",
     "verify": "npm run build && node dist/verify_hooks.js",
     "verify:package": "npm run build && node dist/verify_shellprint.js",
     "test": "npm run build && node dist/test_shellprint.js"
@@ -23,7 +43,6 @@
   },
   "devDependencies": {
     "@types/node": "latest",
-    "tsx": "latest",
     "typescript": "latest",
     "dotenv": "latest"
   }

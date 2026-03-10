@@ -12,7 +12,7 @@
 ### 1. Set up the package structure
 
 - Status: `pending`
-- Create the minimal source layout under `ts/src/`.
+- Create the minimal source layout under `src/`.
 - Update `package.json` and `tsconfig.json` so the package builds from `src` into `dist`.
 - Keep the module layout small and aligned with the architecture doc.
 
@@ -36,7 +36,7 @@ Completion criteria:
 ### 3. Implement event enrichment
 
 - Status: `pending`
-- Implement deterministic category classification and summary generation.
+- Implement deterministic category classification and action generation.
 - Prefer Bash `description` when present and use simple command parsing as fallback.
 - Support at least Bash, Read, Grep, Glob, Edit, and unknown tools.
 
@@ -75,7 +75,7 @@ Completion criteria:
 ### 6. Add offline tests using saved fixtures
 
 - Status: `pending`
-- Replay `ts/hook_payloads.json` through the implementation.
+- Replay `hook_payloads.json` through the implementation.
 - Assert representative categories, summaries, event count, and duration behavior.
 - Verify JSONL output shape and line count.
 - Verify the default zero-config path works in tests without passing custom options.
@@ -119,7 +119,7 @@ Completion criteria:
 
 Completion criteria:
 - there is a concrete sample output from the implemented package
-- the sample preserves raw payloads and has useful summary/category fields
+- the sample preserves raw payloads and has useful action/category fields
 - no new scope is added during the review
 
 ### 10. Review scope and finalize

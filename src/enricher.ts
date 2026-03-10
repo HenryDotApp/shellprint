@@ -18,8 +18,9 @@ const BASH_PATTERNS: Array<[RegExp, ShellPrintCategory]> = [
   [/\b(docker|kubectl|terraform)\b/i, "infrastructure"],
   [/\b(npm|pip|cargo|brew)\b/i, "package_mgmt"],
   [/\b(curl|wget|http|fetch)\b/i, "web_request"],
+  [/\b(grep|rg)\b/i, "content_search"],
   [/\b(mkdir|cp|mv|rm|touch)\b/i, "file_system"],
-  [/\b(grep|awk|sed|cat|head|tail)\b/i, "file_read"],
+  [/\b(awk|sed|cat|head|tail)\b/i, "file_read"],
   [/\b(python|python3|node|ruby)\b/i, "computation"],
 ];
 
@@ -127,10 +128,30 @@ function summarizeCommand(command: string): string {
     return subcommand ? `Ran git ${subcommand}` : "Ran git";
   }
 
+  if (executable === "grep" || executable === "rg") {
+    return summarizeSearchCommand(executable, tokens.slice(1));
+  }
+
   const firstArg = findFirstMeaningfulArgument(tokens.slice(1));
   return firstArg
     ? `Ran ${executable} ${truncate(firstArg, 60)}`
     : `Ran ${executable}`;
+}
+
+function summarizeSearchCommand(
+  executable: string,
+  tokens: string[],
+): string {
+  const pattern = findFirstMeaningfulArgument(tokens) ?? "pattern";
+  const patternIndex = tokens.findIndex((token) => token === pattern);
+  const scope =
+    patternIndex >= 0
+      ? findFirstMeaningfulArgument(tokens.slice(patternIndex + 1))
+      : undefined;
+
+  return scope
+    ? `Searched for '${truncate(pattern, 40)}' in ${truncate(scope, 80)}`
+    : `Searched for '${truncate(pattern, 40)}' with ${executable}`;
 }
 
 function summarizeGrep(toolInput: unknown): string {

@@ -1,2 +1,7 @@
 MVP.md
 python/
+ts/
+.env
+node_modules/
+dist/
+shellprint-*.jsonl

@@ -6,7 +6,7 @@ import type {
 } from "@anthropic-ai/claude-agent-sdk";
 
 import { buildShellPrintEvent } from "./enricher.js";
-import type { EventSink } from "./sinks.js";
+import { freezeEvent, type EventSink } from "./sinks.js";
 import type { ShellPrintEvent } from "./types.js";
 
 type HookMatchers = {
@@ -50,7 +50,7 @@ export function createHookMatchers(params: {
     const startedAt = startedAtByToolUseId.get(input.tool_use_id);
     startedAtByToolUseId.delete(input.tool_use_id);
 
-    const event = buildShellPrintEvent(input, startedAt);
+    const event = freezeEvent(buildShellPrintEvent(input, startedAt));
     events.push(event);
     void sink.write(event);
   }

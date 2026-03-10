@@ -70,3 +70,23 @@ export class MultiSink implements EventSink {
     );
   }
 }
+
+export function freezeEvent<T>(value: T): T {
+  return deepFreeze(value);
+}
+
+function deepFreeze<T>(value: T): T {
+  if (!value || typeof value !== "object") {
+    return value;
+  }
+
+  if (Object.isFrozen(value)) {
+    return value;
+  }
+
+  for (const nestedValue of Object.values(value)) {
+    deepFreeze(nestedValue);
+  }
+
+  return Object.freeze(value);
+}

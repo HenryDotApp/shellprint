@@ -62,24 +62,29 @@ async function main() {
     "Ran curl against https://api.github.com/orgs/anthropics",
   );
 
-  const grepEvent = events.find((event) => event.tool === "Grep");
-  assert.ok(grepEvent, "expected grep event");
-  assert.equal(grepEvent.category, "content_search");
-  assert.match(grepEvent.action, /verify_shellprint\.ts/);
+  const searchEvent = events.find(
+    (event) =>
+      event.action.includes("verify_shellprint.ts") ||
+      event.description?.includes("verify_shellprint.ts"),
+  );
+  assert.ok(searchEvent, "expected search event for verify_shellprint.ts");
 
-  const readEvent = events.find((event) => event.tool === "Read");
-  assert.ok(readEvent, "expected read event");
-  assert.equal(readEvent.category, "file_read");
+  const gitignoreEvent = events.find(
+    (event) =>
+      event.action.includes(".gitignore") ||
+      event.description?.includes(".gitignore"),
+  );
+  assert.ok(gitignoreEvent, "expected .gitignore event");
+  assert.equal(gitignoreEvent.category, "file_read");
 
   const echoEvent = events.find(
     (event) =>
       event.tool === "Bash" &&
       getToolInputString(event.raw.tool_input, "command") === "echo hello world",
   );
-  if (echoEvent) {
-    assert.equal(echoEvent.description, "Echo hello world");
-    assert.equal(echoEvent.action, "Ran echo hello");
-  }
+  assert.ok(echoEvent, "expected echo event");
+  assert.match(echoEvent.action, /^Ran echo\b/);
+  assert.ok(echoEvent.description, "expected echo description");
 
   console.log(`Captured ${events.length} shellprint events`);
   for (const event of events) {

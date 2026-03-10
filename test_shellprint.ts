@@ -8,6 +8,7 @@ import type {
   PreToolUseHookInput,
 } from "@anthropic-ai/claude-agent-sdk";
 
+import { buildShellPrintEvent } from "./src/enricher.js";
 import { createShellPrint } from "./src/index.js";
 
 type CapturedHookPayload = {
@@ -20,6 +21,7 @@ type CapturedHookPayload = {
 async function main() {
   await testFixtureReplay();
   await testSyntheticFailureHandling();
+  testBashSearchNormalization();
   console.log("shellprint tests passed");
 }
 
@@ -211,6 +213,36 @@ async function testSyntheticFailureHandling() {
   } finally {
     process.chdir(originalCwd);
   }
+}
+
+function testBashSearchNormalization() {
+  const event = buildShellPrintEvent({
+    session_id: "session-search",
+    transcript_path: "/tmp/transcript.jsonl",
+    cwd: "/tmp",
+    permission_mode: "bypassPermissions",
+    hook_event_name: "PostToolUse",
+    tool_name: "Bash",
+    tool_input: {
+      command: "grep 'const ' verify_shellprint.ts",
+      description: "Search for 'const ' in verify_shellprint.ts",
+    },
+    tool_response: {
+      stdout: "",
+      stderr: "",
+      interrupted: false,
+      isImage: false,
+      noOutputExpected: false,
+    },
+    tool_use_id: "toolu_search",
+  });
+
+  assert.equal(event.category, "content_search");
+  assert.equal(event.action, "Searched for 'const ' in verify_shellprint.ts");
+  assert.equal(
+    event.description,
+    "Search for 'const ' in verify_shellprint.ts",
+  );
 }
 
 async function loadFixture(): Promise<CapturedHookPayload[]> {

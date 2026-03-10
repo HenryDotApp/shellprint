@@ -155,7 +155,7 @@ The callback sink exists so `onEvent` uses the same pipeline as JSONL instead of
 ## Recommended File Layout
 
 ```text
-ts/src/
+src/
   index.ts
   types.ts
   hooks.ts
