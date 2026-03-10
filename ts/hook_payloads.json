@@ -1,0 +1,239 @@
+[
+  {
+    "hook": "PreToolUse",
+    "ts": 1773081900643,
+    "tool_use_id": "toolu_01PcpkAjRGPvmmQFCpWkX8s1",
+    "input": {
+      "session_id": "515466c0-19ae-4258-97ac-f7afec6fb387",
+      "transcript_path": "/Users/heli/.claude/projects/-Users-heli-projects-shellprint-ts/515466c0-19ae-4258-97ac-f7afec6fb387.jsonl",
+      "cwd": "/Users/heli/projects/shellprint/ts",
+      "permission_mode": "bypassPermissions",
+      "hook_event_name": "PreToolUse",
+      "tool_name": "Bash",
+      "tool_input": {
+        "command": "curl -s https://api.github.com/orgs/anthropics",
+        "description": "Fetch Anthropic's GitHub org info"
+      },
+      "tool_use_id": "toolu_01PcpkAjRGPvmmQFCpWkX8s1"
+    }
+  },
+  {
+    "hook": "PostToolUse",
+    "ts": 1773081900835,
+    "tool_use_id": "toolu_01PcpkAjRGPvmmQFCpWkX8s1",
+    "input": {
+      "session_id": "515466c0-19ae-4258-97ac-f7afec6fb387",
+      "transcript_path": "/Users/heli/.claude/projects/-Users-heli-projects-shellprint-ts/515466c0-19ae-4258-97ac-f7afec6fb387.jsonl",
+      "cwd": "/Users/heli/projects/shellprint/ts",
+      "permission_mode": "bypassPermissions",
+      "hook_event_name": "PostToolUse",
+      "tool_name": "Bash",
+      "tool_input": {
+        "command": "curl -s https://api.github.com/orgs/anthropics",
+        "description": "Fetch Anthropic's GitHub org info"
+      },
+      "tool_response": {
+        "stdout": "{\n  \"login\": \"anthropics\",\n  \"id\": 76263028,\n  \"node_id\": \"MDEyOk9yZ2FuaXphdGlvbjc2MjYzMDI4\",\n  \"url\": \"https://api.github.com/orgs/anthropics\",\n  \"repos_url\": \"https://api.github.com/orgs/anthropics/repos\",\n  \"events_url\": \"https://api.github.com/orgs/anthropics/events\",\n  \"hooks_url\": \"https://api.github.com/orgs/anthropics/hooks\",\n  \"issues_url\": \"https://api.github.com/orgs/anthropics/issues\",\n  \"members_url\": \"https://api.github.com/orgs/anthropics/members{/member}\",\n  \"public_members_url\": \"https://api.github.com/orgs/anthropics/public_members{/member}\",\n  \"avatar_url\": \"https://avatars.githubusercontent.com/u/76263028?v=4\",\n  \"description\": \"\",\n  \"name\": \"Anthropic\",\n  \"company\": null,\n  \"blog\": \"https://anthropic.com\",\n  \"location\": \"United States of America\",\n  \"email\": null,\n  \"twitter_username\": null,\n  \"is_verified\": true,\n  \"has_organization_projects\": true,\n  \"has_repository_projects\": true,\n  \"public_repos\": 73,\n  \"public_gists\": 0,\n  \"followers\": 33605,\n  \"following\": 0,\n  \"html_url\": \"https://github.com/anthropics\",\n  \"created_at\": \"2020-12-19T18:49:20Z\",\n  \"updated_at\": \"2025-05-20T18:06:55Z\",\n  \"archived_at\": null,\n  \"type\": \"Organization\"\n}",
+        "stderr": "",
+        "interrupted": false,
+        "isImage": false,
+        "noOutputExpected": false
+      },
+      "tool_use_id": "toolu_01PcpkAjRGPvmmQFCpWkX8s1"
+    }
+  },
+  {
+    "hook": "PreToolUse",
+    "ts": 1773081901388,
+    "tool_use_id": "toolu_015yH78JxJuqpLAxCZ9KYB5S",
+    "input": {
+      "session_id": "515466c0-19ae-4258-97ac-f7afec6fb387",
+      "transcript_path": "/Users/heli/.claude/projects/-Users-heli-projects-shellprint-ts/515466c0-19ae-4258-97ac-f7afec6fb387.jsonl",
+      "cwd": "/Users/heli/projects/shellprint/ts",
+      "permission_mode": "bypassPermissions",
+      "hook_event_name": "PreToolUse",
+      "tool_name": "Grep",
+      "tool_input": {
+        "pattern": "const ",
+        "path": "verify_hooks.ts",
+        "output_mode": "content",
+        "-n": true
+      },
+      "tool_use_id": "toolu_015yH78JxJuqpLAxCZ9KYB5S"
+    }
+  },
+  {
+    "hook": "PostToolUse",
+    "ts": 1773081901397,
+    "tool_use_id": "toolu_015yH78JxJuqpLAxCZ9KYB5S",
+    "input": {
+      "session_id": "515466c0-19ae-4258-97ac-f7afec6fb387",
+      "transcript_path": "/Users/heli/.claude/projects/-Users-heli-projects-shellprint-ts/515466c0-19ae-4258-97ac-f7afec6fb387.jsonl",
+      "cwd": "/Users/heli/projects/shellprint/ts",
+      "permission_mode": "bypassPermissions",
+      "hook_event_name": "PostToolUse",
+      "tool_name": "Grep",
+      "tool_input": {
+        "pattern": "const ",
+        "path": "verify_hooks.ts",
+        "output_mode": "content",
+        "-n": true
+      },
+      "tool_response": {
+        "mode": "content",
+        "numFiles": 0,
+        "filenames": [],
+        "content": "15:const payloads: any[] = [];\n17:const preToolHook: HookCallback = async (input, toolUseId, _options) => {\n18:  const payload = {\n30:const postToolHook: HookCallback = async (input, toolUseId, _options) => {\n31:  const payload = {\n43:const matcher: HookCallbackMatcher = { hooks: [preToolHook] };\n44:const postMatcher: HookCallbackMatcher = { hooks: [postToolHook] };\n46:const prompt = [\n49:  \"2. Use grep to search for 'const ' in this file (verify_hooks.ts)\",\n59:const q = query({\n76:for await (const message of q) {\n78:    for (const block of message.message.content) {",
+        "numLines": 12
+      },
+      "tool_use_id": "toolu_015yH78JxJuqpLAxCZ9KYB5S"
+    }
+  },
+  {
+    "hook": "PreToolUse",
+    "ts": 1773081902218,
+    "tool_use_id": "toolu_01MaPiBYNzXUmpt4jrhsHpJt",
+    "input": {
+      "session_id": "515466c0-19ae-4258-97ac-f7afec6fb387",
+      "transcript_path": "/Users/heli/.claude/projects/-Users-heli-projects-shellprint-ts/515466c0-19ae-4258-97ac-f7afec6fb387.jsonl",
+      "cwd": "/Users/heli/projects/shellprint/ts",
+      "permission_mode": "bypassPermissions",
+      "hook_event_name": "PreToolUse",
+      "tool_name": "Read",
+      "tool_input": {
+        "file_path": "/root/repo/.gitignore"
+      },
+      "tool_use_id": "toolu_01MaPiBYNzXUmpt4jrhsHpJt"
+    }
+  },
+  {
+    "hook": "PreToolUse",
+    "ts": 1773081907167,
+    "tool_use_id": "toolu_013fJZH58BMfQHY2iXqkUqcH",
+    "input": {
+      "session_id": "515466c0-19ae-4258-97ac-f7afec6fb387",
+      "transcript_path": "/Users/heli/.claude/projects/-Users-heli-projects-shellprint-ts/515466c0-19ae-4258-97ac-f7afec6fb387.jsonl",
+      "cwd": "/Users/heli/projects/shellprint/ts",
+      "permission_mode": "bypassPermissions",
+      "hook_event_name": "PreToolUse",
+      "tool_name": "Read",
+      "tool_input": {
+        "file_path": "/Users/heli/projects/shellprint/ts/.gitignore"
+      },
+      "tool_use_id": "toolu_013fJZH58BMfQHY2iXqkUqcH"
+    }
+  },
+  {
+    "hook": "PostToolUse",
+    "ts": 1773081907169,
+    "tool_use_id": "toolu_013fJZH58BMfQHY2iXqkUqcH",
+    "input": {
+      "session_id": "515466c0-19ae-4258-97ac-f7afec6fb387",
+      "transcript_path": "/Users/heli/.claude/projects/-Users-heli-projects-shellprint-ts/515466c0-19ae-4258-97ac-f7afec6fb387.jsonl",
+      "cwd": "/Users/heli/projects/shellprint/ts",
+      "permission_mode": "bypassPermissions",
+      "hook_event_name": "PostToolUse",
+      "tool_name": "Read",
+      "tool_input": {
+        "file_path": "/Users/heli/projects/shellprint/ts/.gitignore"
+      },
+      "tool_response": {
+        "type": "text",
+        "file": {
+          "filePath": "/Users/heli/projects/shellprint/ts/.gitignore",
+          "content": ".env\nnode_modules/\ndist/\n",
+          "numLines": 4,
+          "startLine": 1,
+          "totalLines": 4
+        }
+      },
+      "tool_use_id": "toolu_013fJZH58BMfQHY2iXqkUqcH"
+    }
+  },
+  {
+    "hook": "PreToolUse",
+    "ts": 1773081907488,
+    "tool_use_id": "toolu_016JQqaFnVY4gi81WDVFtS3W",
+    "input": {
+      "session_id": "515466c0-19ae-4258-97ac-f7afec6fb387",
+      "transcript_path": "/Users/heli/.claude/projects/-Users-heli-projects-shellprint-ts/515466c0-19ae-4258-97ac-f7afec6fb387.jsonl",
+      "cwd": "/Users/heli/projects/shellprint/ts",
+      "permission_mode": "bypassPermissions",
+      "hook_event_name": "PreToolUse",
+      "tool_name": "Bash",
+      "tool_input": {
+        "command": "echo hello world",
+        "description": "Echo hello world"
+      },
+      "tool_use_id": "toolu_016JQqaFnVY4gi81WDVFtS3W"
+    }
+  },
+  {
+    "hook": "PostToolUse",
+    "ts": 1773081907498,
+    "tool_use_id": "toolu_016JQqaFnVY4gi81WDVFtS3W",
+    "input": {
+      "session_id": "515466c0-19ae-4258-97ac-f7afec6fb387",
+      "transcript_path": "/Users/heli/.claude/projects/-Users-heli-projects-shellprint-ts/515466c0-19ae-4258-97ac-f7afec6fb387.jsonl",
+      "cwd": "/Users/heli/projects/shellprint/ts",
+      "permission_mode": "bypassPermissions",
+      "hook_event_name": "PostToolUse",
+      "tool_name": "Bash",
+      "tool_input": {
+        "command": "echo hello world",
+        "description": "Echo hello world"
+      },
+      "tool_response": {
+        "stdout": "hello world",
+        "stderr": "",
+        "interrupted": false,
+        "isImage": false,
+        "noOutputExpected": false
+      },
+      "tool_use_id": "toolu_016JQqaFnVY4gi81WDVFtS3W"
+    }
+  },
+  {
+    "hook": "PreToolUse",
+    "ts": 1773081907910,
+    "tool_use_id": "toolu_01R4qDuCD1AmQLfJWHMee7AQ",
+    "input": {
+      "session_id": "515466c0-19ae-4258-97ac-f7afec6fb387",
+      "transcript_path": "/Users/heli/.claude/projects/-Users-heli-projects-shellprint-ts/515466c0-19ae-4258-97ac-f7afec6fb387.jsonl",
+      "cwd": "/Users/heli/projects/shellprint/ts",
+      "permission_mode": "bypassPermissions",
+      "hook_event_name": "PreToolUse",
+      "tool_name": "Bash",
+      "tool_input": {
+        "command": "ls /nonexistent_dir; echo \"Exit code: $?\"",
+        "description": "Intentionally failing ls command, capturing exit code"
+      },
+      "tool_use_id": "toolu_01R4qDuCD1AmQLfJWHMee7AQ"
+    }
+  },
+  {
+    "hook": "PostToolUse",
+    "ts": 1773081907921,
+    "tool_use_id": "toolu_01R4qDuCD1AmQLfJWHMee7AQ",
+    "input": {
+      "session_id": "515466c0-19ae-4258-97ac-f7afec6fb387",
+      "transcript_path": "/Users/heli/.claude/projects/-Users-heli-projects-shellprint-ts/515466c0-19ae-4258-97ac-f7afec6fb387.jsonl",
+      "cwd": "/Users/heli/projects/shellprint/ts",
+      "permission_mode": "bypassPermissions",
+      "hook_event_name": "PostToolUse",
+      "tool_name": "Bash",
+      "tool_input": {
+        "command": "ls /nonexistent_dir; echo \"Exit code: $?\"",
+        "description": "Intentionally failing ls command, capturing exit code"
+      },
+      "tool_response": {
+        "stdout": "ls: /nonexistent_dir: No such file or directory\nExit code: 1",
+        "stderr": "",
+        "interrupted": false,
+        "isImage": false,
+        "noOutputExpected": false
+      },
+      "tool_use_id": "toolu_01R4qDuCD1AmQLfJWHMee7AQ"
+    }
+  }
+]

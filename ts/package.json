@@ -1,0 +1,30 @@
+{
+  "name": "shellprint",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "example": "npm run build && node dist/example_query.js",
+    "verify": "npm run build && node dist/verify_hooks.js",
+    "verify:package": "npm run build && node dist/verify_shellprint.js",
+    "test": "npm run build && node dist/test_shellprint.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "tsx": "latest",
+    "typescript": "latest",
+    "dotenv": "latest"
+  }
+}
