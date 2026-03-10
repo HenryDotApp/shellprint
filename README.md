@@ -33,9 +33,9 @@ The goal is to give product and engineering teams something they can log, inspec
 
 ## Install
 
-This repo is now structured as a normal source package at the repo root.
+`shellprint` is not published to npm yet.
 
-From another app, install it from a local checkout:
+Install it from a local checkout:
 
 ```bash
 npm install ../shellprint
@@ -55,7 +55,7 @@ import { createShellPrint } from "shellprint";
 
 ## Basic usage
 
-Attach shellprint to your existing `query()` call:
+Attach `shellprint` to your existing `query()` call:
 
 ```ts
 import { query } from "@anthropic-ai/claude-agent-sdk";
@@ -88,6 +88,12 @@ for await (const message of result) {
 await shellprint.flush();
 const events = shellprint.getEvents();
 ```
+
+What this does:
+
+- collects completed tool-use events in memory
+- writes JSONL to `./shellprint-events.jsonl`
+- optionally streams each event through `onEvent`
 
 ## Event shape
 
@@ -122,6 +128,13 @@ Field meaning:
 
 ## How to try it safely
 
+These commands are for evaluating this repository itself, not for consumers integrating the package into another app.
+
+Prerequisites for the live commands:
+
+- a valid `ANTHROPIC_API_KEY`
+- access to the Claude Agent SDK from your environment
+
 ### 1. Run the offline tests
 
 ```bash
@@ -143,7 +156,7 @@ This verifies:
 npm run verify:package
 ```
 
-This runs a real Agent SDK session and prints emitted events in a human-readable format.
+This runs a real Claude Agent SDK session and prints emitted events in a human-readable format.
 
 It also writes:
 
@@ -155,7 +168,7 @@ It also writes:
 npm run example
 ```
 
-This is the closest thing to how another app would use the package.
+This is a small runnable integration example that mirrors how another app would use the package.
 
 Source:
 
@@ -166,8 +179,8 @@ Source:
 Start simple:
 
 1. attach the hook matchers to one existing `query()` flow
-2. write JSONL locally or to a controlled writable path
-3. inspect emitted events
+2. write JSONL to a controlled writable path
+3. inspect the emitted events and confirm the `action` values are useful for your product
 4. only then wire `onEvent` into your app's logging or telemetry pipeline
 
 Things to watch:
@@ -194,8 +207,3 @@ Not included:
 - external sinks like Braintrust
 - success/failure status modeling
 - detail extraction from stdout/content
-
-## Additional docs
-
-- Architecture: [`ARCHITECTURE.md`](./ARCHITECTURE.md)
-- Example notes: [`EXAMPLE.md`](./EXAMPLE.md)
